@@ -1,17 +1,6 @@
-## Foundry
+## Precompile Checker
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
-
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
+A Foundry script to test which EVM precompiles are supported on various blockchain networks.
 
 ## Usage
 
@@ -21,46 +10,22 @@ https://book.getfoundry.sh/
 $ forge build
 ```
 
-### Test
+### PrecompileChecker
+
+Test which EVM precompiles are supported on a specific blockchain network:
 
 ```shell
-$ forge test
+$ forge script script/PrecompileChecker.s.sol --rpc-url <your_rpc_url>
 ```
 
-### Format
+This script tests support for all standard Ethereum precompiles (0x01-0x09) on the specified RPC endpoint and reports which ones are supported:
 
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- ECRECOVER (0x01): Elliptic curve digital signature recovery
+- SHA256 (0x02): SHA-256 hash function
+- RIPEMD160 (0x03): RIPEMD-160 hash function
+- IDENTITY (0x04): Identity function (data copy)
+- MODEXP (0x05): Modular exponentiation
+- ECADD (0x06): Elliptic curve addition
+- ECMUL (0x07): Elliptic curve scalar multiplication
+- ECPAIRING (0x08): Elliptic curve pairing check
+- BLAKE2F (0x09): BLAKE2 compression function
